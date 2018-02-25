@@ -1,14 +1,9 @@
 import * as React from 'react';
-import Button from 'material-ui/Button';
-import Dialog, {
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-  DialogActions,
-} from 'material-ui/Dialog';
 import Typography from 'material-ui/Typography';
 import withStyles, { WithStyles, StyleRulesCallback } from 'material-ui/styles/withStyles';
 import withRoot from '../withRoot';
+import poster from './giphy.gif';
+import video from './giphy.mp4';
 
 const styles: StyleRulesCallback<'root'> = theme => ({
   root: {
@@ -41,26 +36,30 @@ class Index extends React.Component<WithStyles<'root'>, State> {
   render() {
     return (
       <div className={this.props.classes.root}>
-        <Dialog open={this.state.open} onClose={this.handleClose}>
-          <DialogTitle>Super Secret Password</DialogTitle>
-          <DialogContent>
-            <DialogContentText>1-2-3-4-5</DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button color="primary" onClick={this.handleClose}>
-              OK
-            </Button>
-          </DialogActions>
-        </Dialog>
         <Typography variant="display1" gutterBottom>
-          Material-UI
+          Noël Macé ( dot com )
         </Typography>
         <Typography variant="subheading" gutterBottom>
-          example project
+          Website under (re-)construction !
         </Typography>
-        <Button variant="raised" color="secondary" onClick={this.handleClick}>
-          Super Secret Password
-        </Button>
+        <video
+          width="320"
+          height="320"
+          autoPlay
+          loop
+          muted
+          poster={poster}
+        >
+          <source type="video/mp4" src={video} />
+
+          Your browser does not support HTML5 video tag.
+
+          <a href="https://gph.is/1ZidoAN">
+            Click here to view original GIF
+          </a>
+
+        </video>
+
       </div>
     );
   }
