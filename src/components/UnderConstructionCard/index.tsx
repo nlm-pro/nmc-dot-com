@@ -3,21 +3,23 @@ import * as React from 'react';
 import Card, { CardHeader, CardContent } from 'material-ui/Card';
 import { CardActions, IconButton, Collapse } from 'material-ui';
 import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
+import Timelapse from 'material-ui-icons/Timelapse';
 import * as classnames from 'classnames';
 import poster from './giphy.gif';
 import video from './giphy.mp4';
 import withStyles from 'material-ui/styles/withStyles';
 import FakeChecklist from '../FakeChecklist';
 
-type Classes = 'card' | 'actions' | 'expand' | 'expandOpen' | 'details';
+type Classes = 'card' | 'actions' | 'expand' | 'expandOpen' | 'details' | 'media' | 'gif';
 type UnderConstructionCardState = { expanded: boolean };
 
 const styles: StyleRulesCallback<Classes> = theme => ({
     card: {
-        padding: theme.spacing.unit * 2,
+        textAlign: 'center',
     },
     actions: {
         display: 'flex',
+        paddingLeft: theme.spacing.unit * 4
     },
     expand: {
         transform: 'rotate(0deg)',
@@ -30,7 +32,14 @@ const styles: StyleRulesCallback<Classes> = theme => ({
         transform: 'rotate(180deg)',
     },
     details: {
-        textAlign: 'justify'
+        textAlign: 'justify',
+    },
+    media: {
+        backgroundColor: '#000',
+        padding: 0,
+    },
+    gif: {
+        maxWidth: '100%',
     }
 });
 
@@ -55,10 +64,13 @@ class UnderConstructionCard extends React.Component<WithStyles<Classes>, UnderCo
         return (
             <Card className={classes.card}>
                 <CardHeader
-                    title="Website under (re-)construction !"
-                    subheader="With real pieces of personnal technical challenges inside !"
+                    avatar={
+                        <Timelapse />
+                    }
+                    title="Website under (re-)construction"
+                    subheader="With big chunks of React inside !"
                 />
-                <CardContent>
+                <CardContent className={classes.media}>
                     <video
                         width="320"
                         height="320"
@@ -66,6 +78,7 @@ class UnderConstructionCard extends React.Component<WithStyles<Classes>, UnderCo
                         loop
                         muted
                         poster={poster}
+                        className={classes.gif}
                     >
                         <source type="video/mp4" src={video} />
                         Your browser does not support HTML5 video tag.
@@ -84,7 +97,7 @@ class UnderConstructionCard extends React.Component<WithStyles<Classes>, UnderCo
                 </CardContent>
                 <CardActions className={classes.actions} disableActionSpacing>
                     <Typography variant="caption">
-                        More info about that
+                        More info on current and futur developments
                     </Typography>
                     <IconButton
                         className={classnames(classes.expand, {
@@ -100,7 +113,7 @@ class UnderConstructionCard extends React.Component<WithStyles<Classes>, UnderCo
                 <Collapse in={this.state.expanded} timeout="auto" unmountOnExit className={classes.details}>
                     <CardContent>
                         <Typography paragraph variant="body2">
-                            My "maybe one day" todo list
+                            My "TO (Mebbe) DO" list
                         </Typography>
                         <FakeChecklist items={todoList} />
                     </CardContent>

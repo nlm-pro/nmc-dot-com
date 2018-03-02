@@ -1,21 +1,25 @@
 import * as React from 'react';
-import withRoot from './withRoot';
+import withRoot from './HOCs/withRoot';
 import { Route } from 'react-router';
-import Home from './pages/Home';
+import Home from './scenes/Home';
 import AppBar from 'material-ui/AppBar';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import { StyleRulesCallback } from 'material-ui';
 
-type classes = 'root' | 'header';
+type classes = 'root' | 'header' | 'content';
 
 const styles: StyleRulesCallback<classes> = theme => ({
   root: {
     flexGrow: 1,
   },
   header: {
-    'margin-bottom': theme.spacing.unit * 4
+  },
+  content: {
+    [theme.breakpoints.up('sm')]: {
+      marginTop: theme.spacing.unit * 2
+    }
   }
 });
 
@@ -30,7 +34,7 @@ class App extends React.Component<WithStyles<classes>, {}> {
             </Typography>
           </Toolbar>
         </AppBar>
-        <div>
+        <div className={this.props.classes.content}>
           <Route exact path="/" component={Home} />
         </div>
       </div>

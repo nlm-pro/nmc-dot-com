@@ -7,9 +7,8 @@ type Classes = 'home';
 
 const styles: StyleRulesCallback<Classes> = theme => ({
     home: {
-        textAlign: 'center',
-        flexGrow: 1,
-    }
+        padding: 12,
+    },
 });
 
 type HomeState = {};
@@ -19,18 +18,18 @@ class Home extends React.Component<WithStyles<Classes>, HomeState> {
     render() {
         const classes = this.props.classes;
         return (
-            <Grid
-                container
-                className={classes.home}
-                alignItems="center"
-                justify="center"
-                direction="column"
-                spacing={24}
-            >
-                <Grid item md={6} sm={12}>
-                    <UnderConstructionCard />
+            <div className={classes.home}>
+                <Grid
+                    container
+                    alignItems="center"
+                    justify="center"
+                    spacing={24}
+                >
+                    <Grid item md={6} xs={12}>
+                        <UnderConstructionCard />
+                    </Grid>
                 </Grid>
-            </Grid>
+            </div>
         );
     }
 }
