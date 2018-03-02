@@ -1,15 +1,14 @@
 import * as React from 'react';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
-import purple from 'material-ui/colors/purple';
-import green from 'material-ui/colors/green';
 import Reboot from 'material-ui/Reboot';
+import { grey, red } from 'material-ui/colors';
 
 // A theme with custom primary and secondary color.
 // It's optional.
 const theme = createMuiTheme({
   palette: {
-    primary: purple,
-    secondary: green,
+    primary: red,
+    secondary: grey,
   },
 });
 

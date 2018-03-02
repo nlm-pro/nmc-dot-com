@@ -6,18 +6,24 @@ import AppBar from 'material-ui/AppBar';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
+import { StyleRulesCallback } from 'material-ui';
 
-const styles = {
+type classes = 'root' | 'header';
+
+const styles: StyleRulesCallback<classes> = theme => ({
   root: {
     flexGrow: 1,
   },
-};
+  header: {
+    'margin-bottom': theme.spacing.unit * 4
+  }
+});
 
-class App extends React.Component<WithStyles<'root'>, {}> {
+class App extends React.Component<WithStyles<classes>, {}> {
   render() {
     return (
       <div className={this.props.classes.root}>
-        <AppBar position="static">
+        <AppBar position="static" className={this.props.classes.header}>
           <Toolbar>
             <Typography variant="title" color="inherit">
               Noël Macé (dot com)
