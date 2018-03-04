@@ -7,6 +7,7 @@ import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import { StyleRulesCallback } from 'material-ui';
+import withTracker from './HOCs/withTracker';
 
 type classes = 'root' | 'header' | 'content';
 
@@ -35,7 +36,7 @@ class App extends React.Component<WithStyles<classes>, {}> {
           </Toolbar>
         </AppBar>
         <div className={this.props.classes.content}>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={withTracker(Home, {})} />
         </div>
       </div>
     );
