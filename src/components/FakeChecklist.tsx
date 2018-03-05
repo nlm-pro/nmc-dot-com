@@ -6,9 +6,8 @@ import ListItemText from 'material-ui/List/ListItemText';
 import ListItemIcon from 'material-ui/List/ListItemIcon';
 import * as React from 'react';
 
-type ChecklistItem = { title: string, checked?: boolean; text?: string };
-
-type FakeChecklistProps = { items: ChecklistItem[] };
+export type ChecklistItem = { title: string, checked?: boolean; text?: string };
+export type FakeChecklistProps = { items: ChecklistItem[] };
 
 const FakeChecklist: React.SFC<FakeChecklistProps> = (props) => (
     <List dense>

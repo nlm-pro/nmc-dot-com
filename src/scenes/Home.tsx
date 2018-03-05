@@ -2,6 +2,7 @@ import * as React from 'react';
 import withStyles, { StyleRulesCallback, WithStyles } from 'material-ui/styles/withStyles';
 import Grid from 'material-ui/Grid';
 import UnderConstructionCard from '../components/UnderConstructionCard';
+import MotivationalCard from '../components/MotivationalCard';
 
 type Classes = 'home';
 
@@ -21,12 +22,15 @@ class Home extends React.Component<WithStyles<Classes>, HomeState> {
             <div className={classes.home}>
                 <Grid
                     container
-                    alignItems="center"
+                    alignItems="stretch"
                     justify="center"
                     spacing={24}
                 >
                     <Grid item md={6} xs={12}>
                         <UnderConstructionCard />
+                    </Grid>
+                    <Grid item md={6} xs={12}>
+                        <MotivationalCard />
                     </Grid>
                 </Grid>
             </div>
