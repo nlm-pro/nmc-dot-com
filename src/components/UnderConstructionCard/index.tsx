@@ -9,6 +9,7 @@ import poster from './giphy.gif';
 import video from './giphy.mp4';
 import withStyles from 'material-ui/styles/withStyles';
 import FakeChecklist from '../FakeChecklist';
+import todoList from './todoList';
 
 type Classes = 'card' | 'actions' | 'expand' | 'expandOpen' | 'details' | 'media' | 'gif';
 type UnderConstructionCardState = { expanded: boolean };
@@ -42,14 +43,6 @@ const styles: StyleRulesCallback<Classes> = theme => ({
         maxWidth: '100%',
     }
 });
-
-type TodoItem = { title: string, text?: string };
-
-const todoList: TodoItem[] = [
-    {
-        title: 'this list, to begin with ...'
-    }
-];
 
 class UnderConstructionCard extends React.Component<WithStyles<Classes>, UnderConstructionCardState> {
 
