@@ -33,16 +33,20 @@ class MotivationalCard extends React.Component<WithStyles<Classes>, Motivational
         };
     }
 
+    convertGhResToMoment(res: any): moment.Moment {
+        return moment(res.data.commit.commit.committer.date.slice(0, -1)).add(1, 'h');
+    }
+
     componentDidMount() {
         const repo = (new Github()).getRepo('noelmace', 'nmc-dot-com');
         repo.getBranch('develop').then((res: any) => {
             this.setState({
-                lastCommit: moment(res.data.commit.commit.committer.date.slice(0, -1))
+                lastCommit: this.convertGhResToMoment(res)
             });
         });
         repo.getBranch('gh-pages').then((res: any) => {
             this.setState({
-                lastDeploy: moment(res.data.commit.commit.committer.date.slice(0, -1))
+                lastDeploy: this.convertGhResToMoment(res)
             });
         });
     }
