@@ -8,21 +8,25 @@ export default [
         choice to begin with, as it helps writting a lot of code without reading a bunch of redondant documentation.`
     },
     {
-        title: 'quickly write some content'
+        title: 'quickly build a simple web app',
+        text: `with just the key features and a basic UI thanks to material-ui-next`
     },
     {
         title: 'leave Github Pages for Google Cloud',
         text: 'Because I need SSL and server side rendering'
     },
     {
-        title: 'make it a good PWA'
+        title: 'add SSL and Service Worker'
     },
     {
-        title: 'make a good App Shell thanks to server rendering'
+        title: 'make a good App Shell and better performances thanks to server rendering'
     },
     {
         title: 'add some "blog" section',
         text: 'from static markdown files, before everything else'
+    },
+    {
+        title: 'Web Notifications'
     },
     {
         title: 'some clean and reusable Google Analytics setup',

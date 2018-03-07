@@ -60,7 +60,7 @@ class UnderConstructionCard extends React.Component<WithStyles<Classes>, UnderCo
                     avatar={
                         <Timelapse />
                     }
-                    title="Website under (re-)construction"
+                    title="Website under active development."
                     subheader="With big chunks of React inside !"
                 />
                 <CardContent className={classes.media}>
@@ -75,9 +75,9 @@ class UnderConstructionCard extends React.Component<WithStyles<Classes>, UnderCo
                     >
                         <source type="video/mp4" src={video} />
                         Your browser does not support HTML5 video tag.
-                                <a href="https://gph.is/1ZidoAN">
+                        <a href="https://gph.is/1ZidoAN">
                             Click here to view original GIF
-                                </a>
+                        </a>
                     </video>
                 </CardContent>
                 <CardContent>
