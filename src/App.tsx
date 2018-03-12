@@ -8,36 +8,47 @@ import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import { StyleRulesCallback } from 'material-ui';
 import withTracker from './HOCs/withTracker';
+import AppDrawer from './shell/AppDrawer';
 
-type classes = 'root' | 'header' | 'content';
+type Classes = 'root' | 'appBar' | 'content' | 'toolbar';
 
-const styles: StyleRulesCallback<classes> = theme => ({
+const drawerWidth = 240;
+
+const styles: StyleRulesCallback<Classes> = theme => ({
   root: {
-    flexGrow: 1,
+    display: 'flex',
+    width: '100%',
   },
-  header: {
+  appBar: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
   },
   content: {
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing.unit * 2
-    }
-  }
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.default,
+    padding: theme.spacing.unit * 3,
+  },
+  toolbar: theme.mixins.toolbar,
 });
 
-class App extends React.Component<WithStyles<classes>, {}> {
+class App extends React.Component<WithStyles<Classes>, {}> {
+
   render() {
+    const { classes } = this.props;
     return (
-      <div className={this.props.classes.root}>
-        <AppBar position="static" className={this.props.classes.header}>
+      <div className={classes.root}>
+        <AppBar position="absolute" className={classes.appBar}>
           <Toolbar>
             <Typography variant="title" color="inherit">
-              Noël Macé (dot com)
+              Home Page
             </Typography>
           </Toolbar>
         </AppBar>
-        <div className={this.props.classes.content}>
+        <AppDrawer />
+        <main className={classes.content}>
+          <div className={classes.toolbar} />
           <Route exact path="/" component={withTracker(Home, {})} />
-        </div>
+        </main>
       </div>
     );
   }
