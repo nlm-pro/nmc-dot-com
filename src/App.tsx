@@ -9,6 +9,9 @@ import Typography from 'material-ui/Typography';
 import { StyleRulesCallback } from 'material-ui';
 import withTracker from './HOCs/withTracker';
 import AppDrawer from './shell/AppDrawer';
+import { getTitle } from './redux/shell';
+import { RootState } from './redux';
+import { connect } from 'react-redux';
 
 type Classes = 'root' | 'appBar' | 'content' | 'toolbar';
 
@@ -31,16 +34,20 @@ const styles: StyleRulesCallback<Classes> = theme => ({
   toolbar: theme.mixins.toolbar,
 });
 
-class App extends React.Component<WithStyles<Classes>, {}> {
+type Props = WithStyles<Classes> & {
+  title: string,
+};
+
+class App extends React.Component<Props, {}> {
 
   render() {
-    const { classes } = this.props;
+    const { classes, title } = this.props;
     return (
       <div className={classes.root}>
         <AppBar position="absolute" className={classes.appBar}>
           <Toolbar>
             <Typography variant="title" color="inherit">
-              Home Page
+              {title}
             </Typography>
           </Toolbar>
         </AppBar>
@@ -54,4 +61,10 @@ class App extends React.Component<WithStyles<Classes>, {}> {
   }
 }
 
-export default withRoot(withStyles(styles)<{}>(App));
+const WrappedApp = withRoot(withStyles(styles)<{}>(App));
+
+const mapStateToProps = (state: RootState) => ({
+  title: getTitle(state),
+});
+
+export default connect(mapStateToProps, {})(WrappedApp);

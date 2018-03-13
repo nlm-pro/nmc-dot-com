@@ -3,6 +3,8 @@ import withStyles, { StyleRulesCallback, WithStyles } from 'material-ui/styles/w
 import Grid from 'material-ui/Grid';
 import UnderConstructionCard from '../components/UnderConstructionCard';
 import MotivationalCard from '../components/MotivationalCard';
+import store from '../store';
+import { shellActions } from '../redux/shell';
 
 type Classes = 'home';
 
@@ -15,6 +17,10 @@ const styles: StyleRulesCallback<Classes> = theme => ({
 type HomeState = {};
 
 class Home extends React.Component<WithStyles<Classes>, HomeState> {
+
+    componentDidMount() {
+        store.dispatch(shellActions.setTitle('Home Page'));
+    }
 
     render() {
         const classes = this.props.classes;
