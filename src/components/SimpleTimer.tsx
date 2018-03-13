@@ -9,7 +9,6 @@ interface SimpleTimerState {
 
 export interface SimpleTimerProps {
     initialDate: moment.Moment;
-    interval?: number;
 }
 
 type Classes = 'timer';
@@ -22,24 +21,36 @@ const styles: StyleRulesCallback<Classes> = theme => ({
     },
 });
 
-class SimpleTimer extends React.Component<Props, SimpleTimerState> {
-
-    public static defaultProps: Partial<Props> = {
-        interval: 60 * 1000
-    };
+export class SimpleTimer extends React.Component<Props, SimpleTimerState> {
 
     private timer: NodeJS.Timer;
 
     constructor(props: Props) {
-
         super(props);
-        this.state = { time: this.props.initialDate.fromNow() };
+        this.state = {
+            time: this.props.initialDate.fromNow(),
+        };
+    }
+
+    getDelai() {
+        const diff = moment().diff(this.props.initialDate);
+        return (
+            diff / 1000 / 60 / 60 / 24 > 1 ? 1000 * 60 * 60 * 24  // days
+                : diff / 1000 / 60 / 60 > 1 ? 1000 * 60 * 60 // hour
+                    : 1000 * 60 // minute
+        ) + 500;
+    }
+
+    delaiUpdate() {
+        clearInterval(this.timer);
+        this.timer = setTimeout(this.updateTime, this.getDelai());
     }
 
     updateTime = () => {
         this.setState({
             time: this.props.initialDate.fromNow()
         });
+        this.delaiUpdate();
     }
 
     componentWillUnmount() {
@@ -47,7 +58,7 @@ class SimpleTimer extends React.Component<Props, SimpleTimerState> {
     }
 
     componentDidMount() {
-        this.timer = setInterval(this.updateTime, this.props.interval as number);
+        this.delaiUpdate();
     }
 
     render() {
@@ -59,3 +70,5 @@ class SimpleTimer extends React.Component<Props, SimpleTimerState> {
 }
 
 export default withStyles(styles)<SimpleTimerProps>(SimpleTimer);
+
+export { SimpleTimer as SimpleTimerClass };
