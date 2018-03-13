@@ -72,9 +72,9 @@ class MotivationalCard extends React.Component<WithStyles<Classes>, Motivational
                         <Typography variant="body2">
                             {(() => {
                                 switch (branche) {
-                                    case Branche.develop:
-                                        return 'These version has been published';
                                     case Branche.ghPages:
+                                        return 'These version has been published';
+                                    case Branche.develop:
                                         return 'Last commit on the "develop" branch was';
                                     default:
                                         return '';
