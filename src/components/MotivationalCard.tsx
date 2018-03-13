@@ -19,8 +19,8 @@ const styles: StyleRulesCallback<Classes> = theme => ({
 });
 
 interface MotivationalCardState {
-    lastDeploy: moment.Moment;
-    lastCommit: moment.Moment;
+    lastDeploy?: moment.Moment;
+    lastCommit?: moment.Moment;
 }
 
 class MotivationalCard extends React.Component<WithStyles<Classes>, MotivationalCardState> {
@@ -28,8 +28,8 @@ class MotivationalCard extends React.Component<WithStyles<Classes>, Motivational
     constructor(props: WithStyles<Classes>) {
         super(props);
         this.state = {
-            lastDeploy: moment('invalid'),
-            lastCommit: moment('invalid')
+            lastDeploy: undefined,
+            lastCommit: undefined,
         };
     }
 
@@ -52,7 +52,7 @@ class MotivationalCard extends React.Component<WithStyles<Classes>, Motivational
     }
 
     render() {
-        const classes = this.props.classes;
+        const { classes } = this.props;
         return (
             <Card className={classes.card}>
                 <CardHeader
@@ -69,7 +69,7 @@ class MotivationalCard extends React.Component<WithStyles<Classes>, Motivational
                     <SimpleTimer initialDate={moment({ year: 2018, month: 1, day: 26 })} />
                 </CardContent>
                 {(() => {
-                    if (this.state.lastDeploy.isValid()) {
+                    if (this.state.lastDeploy && this.state.lastDeploy.isValid()) {
                         return (
                             <CardContent>
                                 <Typography variant="body2">
@@ -82,7 +82,7 @@ class MotivationalCard extends React.Component<WithStyles<Classes>, Motivational
                     return;
                 })()}
                 {(() => {
-                    if (this.state.lastCommit.isValid()) {
+                    if (this.state.lastCommit && this.state.lastCommit.isValid()) {
                         return (
                             <CardContent>
                                 <Typography variant="body2">
