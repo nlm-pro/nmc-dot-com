@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
-import Reboot from 'material-ui/Reboot';
 import { grey, red } from 'material-ui/colors';
 
 // A theme with custom primary and secondary color.
@@ -19,7 +18,6 @@ function withRoot(Component: React.ComponentType) {
     return (
       <MuiThemeProvider theme={theme}>
         {/* Reboot kickstart an elegant, consistent, and simple baseline to build upon. */}
-        <Reboot />
         <Component {...props} />
       </MuiThemeProvider>
     );

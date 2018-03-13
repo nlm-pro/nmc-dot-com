@@ -7,6 +7,8 @@ import { StyleRulesCallback } from 'material-ui';
 import withTracker from './HOCs/withTracker';
 import AppDrawer, { drawerWidth } from './shell/AppDrawer';
 import AppShellBar from './shell/AppShellBar';
+import About from './scenes/About';
+import CssBaseline from 'material-ui/CssBaseline';
 
 type Classes = 'root' | 'appBar' | 'content' | 'toolbar';
 
@@ -34,13 +36,17 @@ class App extends React.Component<Props, {}> {
   render() {
     const { classes } = this.props;
     return (
-      <div className={classes.root}>
-        <AppShellBar />
-        <AppDrawer />
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
-          <Route exact path="/" component={withTracker(Home, {})} />
-        </main>
+      <div>
+        <CssBaseline />
+        <div className={classes.root}>
+          <AppShellBar />
+          <AppDrawer />
+          <main className={classes.content}>
+            <div className={classes.toolbar} />
+            <Route exact path="/" component={withTracker(Home, {})} />
+            <Route path="/about" component={withTracker(About, {})} />
+          </main>
+        </div>
       </div>
     );
   }
