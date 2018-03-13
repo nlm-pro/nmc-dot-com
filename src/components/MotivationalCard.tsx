@@ -18,41 +18,76 @@ const styles: StyleRulesCallback<Classes> = theme => ({
     }
 });
 
-interface MotivationalCardState {
-    lastDeploy?: moment.Moment;
-    lastCommit?: moment.Moment;
+enum Branche {
+    develop = 'develop',
+    ghPages = 'gh-pages',
 }
+
+type MotivationalCardState = {
+    [key in Branche]?: moment.Moment;
+};
+
+const initialState: MotivationalCardState = {};
 
 class MotivationalCard extends React.Component<WithStyles<Classes>, MotivationalCardState> {
 
+    repo: any;
+
     constructor(props: WithStyles<Classes>) {
         super(props);
-        this.state = {
-            lastDeploy: undefined,
-            lastCommit: undefined,
-        };
+        this.state = initialState;
     }
 
-    convertGhResToMoment(res: any): moment.Moment {
-        return moment(res.data.commit.commit.committer.date.slice(0, -1)).add(1, 'h');
+    updateCommitDate(branch: Branche) {
+        this.repo.getBranch(branch).then((res: any) => {
+            this.setState({
+                [branch]: moment(res.data.commit.commit.committer.date.slice(0, -1)).add(1, 'h')
+            });
+        });
+    }
+
+    getCommitDate(branch: Branche) {
+        const commit = this.state && this.state[branch];
+        return commit && commit.isValid() && commit;
+    }
+
+    componentWillMount() {
+        this.repo = (new Github()).getRepo('noelmace', 'nmc-dot-com');
     }
 
     componentDidMount() {
-        const repo = (new Github()).getRepo('noelmace', 'nmc-dot-com');
-        repo.getBranch('develop').then((res: any) => {
-            this.setState({
-                lastCommit: this.convertGhResToMoment(res)
-            });
-        });
-        repo.getBranch('gh-pages').then((res: any) => {
-            this.setState({
-                lastDeploy: this.convertGhResToMoment(res)
-            });
-        });
+        this.updateCommitDate(Branche.develop);
+        this.updateCommitDate(Branche.ghPages);
     }
 
     render() {
         const { classes } = this.props;
+
+        const commitDateCard = (branche: Branche) => {
+            const date = this.getCommitDate(branche);
+            let elmt: JSX.Element | null = null;
+            if (date) {
+                elmt = (
+                    <CardContent>
+                        <Typography variant="body2">
+                            {(() => {
+                                switch (branche) {
+                                    case Branche.develop:
+                                        return 'These version has been published';
+                                    case Branche.ghPages:
+                                        return 'Last commit on the "develop" branch was';
+                                    default:
+                                        return '';
+                                }
+                            })()}
+                        </Typography>
+                        <SimpleTimer initialDate={date} />
+                    </CardContent>
+                );
+            }
+            return elmt;
+        };
+
         return (
             <Card className={classes.card}>
                 <CardHeader
@@ -68,32 +103,8 @@ class MotivationalCard extends React.Component<WithStyles<Classes>, Motivational
                     </Typography>
                     <SimpleTimer initialDate={moment({ year: 2018, month: 1, day: 26 })} />
                 </CardContent>
-                {(() => {
-                    if (this.state.lastDeploy && this.state.lastDeploy.isValid()) {
-                        return (
-                            <CardContent>
-                                <Typography variant="body2">
-                                    These version has been published
-                                </Typography>
-                                <SimpleTimer initialDate={this.state.lastDeploy} />
-                            </CardContent>
-                        );
-                    }
-                    return;
-                })()}
-                {(() => {
-                    if (this.state.lastCommit && this.state.lastCommit.isValid()) {
-                        return (
-                            <CardContent>
-                                <Typography variant="body2">
-                                    Last commit on the 'develop' branch was
-                                </Typography>
-                                <SimpleTimer initialDate={this.state.lastCommit} />
-                            </CardContent>
-                        );
-                    }
-                    return;
-                })()}
+                {commitDateCard(Branche.develop)}
+                {commitDateCard(Branche.ghPages)}
             </Card>
         );
     }
