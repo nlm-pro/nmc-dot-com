@@ -11,9 +11,9 @@ export type FakeChecklistProps = { items: ChecklistItem[] };
 
 const FakeChecklist: React.SFC<FakeChecklistProps> = (props) => (
     <List dense>
-        {props.items.map(item => (
+        {props.items.map((item, key) => (
 
-            <ListItem>
+            <ListItem key={key}>
                 <ListItemIcon>
                     {item.checked ? <Checkbox /> : <CheckBoxOutlineBlank />}
                 </ListItemIcon>
