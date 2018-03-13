@@ -2,20 +2,13 @@ import * as React from 'react';
 import withRoot from './HOCs/withRoot';
 import { Route } from 'react-router';
 import Home from './scenes/Home';
-import AppBar from 'material-ui/AppBar';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
 import { StyleRulesCallback } from 'material-ui';
 import withTracker from './HOCs/withTracker';
-import AppDrawer from './shell/AppDrawer';
-import { getTitle } from './redux/shell';
-import { RootState } from './redux';
-import { connect } from 'react-redux';
+import AppDrawer, { drawerWidth } from './shell/AppDrawer';
+import AppShellBar from './shell/AppShellBar';
 
 type Classes = 'root' | 'appBar' | 'content' | 'toolbar';
-
-const drawerWidth = 240;
 
 const styles: StyleRulesCallback<Classes> = theme => ({
   root: {
@@ -34,23 +27,15 @@ const styles: StyleRulesCallback<Classes> = theme => ({
   toolbar: theme.mixins.toolbar,
 });
 
-type Props = WithStyles<Classes> & {
-  title: string,
-};
+type Props = WithStyles<Classes>;
 
 class App extends React.Component<Props, {}> {
 
   render() {
-    const { classes, title } = this.props;
+    const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <AppBar position="absolute" className={classes.appBar}>
-          <Toolbar>
-            <Typography variant="title" color="inherit">
-              {title}
-            </Typography>
-          </Toolbar>
-        </AppBar>
+        <AppShellBar />
         <AppDrawer />
         <main className={classes.content}>
           <div className={classes.toolbar} />
@@ -61,10 +46,4 @@ class App extends React.Component<Props, {}> {
   }
 }
 
-const WrappedApp = withRoot(withStyles(styles)<{}>(App));
-
-const mapStateToProps = (state: RootState) => ({
-  title: getTitle(state),
-});
-
-export default connect(mapStateToProps, {})(WrappedApp);
+export default withRoot(withStyles(styles)<{}>(App));

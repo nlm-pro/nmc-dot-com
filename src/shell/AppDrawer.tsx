@@ -6,7 +6,7 @@ import Typography from 'material-ui/Typography';
 
 type Classes = 'drawerPaper' | 'toolbar';
 
-const drawerWidth = 240;
+export const drawerWidth = 240;
 
 const styles: StyleRulesCallback<Classes> = theme => ({
     drawerPaper: {
