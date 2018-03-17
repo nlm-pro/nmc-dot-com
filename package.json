@@ -42,7 +42,8 @@
     "typescript": "^2.7.2"
   },
   "scripts": {
-    "predeploy": "yarn build",
+    "version": "git add package.json",
+    "predeploy": "yarn test && yarn build && yarn version",
     "deploy": "gh-pages -d build",
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
