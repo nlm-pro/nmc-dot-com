@@ -31,7 +31,28 @@ const styles: StyleRulesCallback<Classes> = theme => ({
 
 type Props = WithStyles<Classes>;
 
-class App extends React.Component<Props, {}> {
+interface AppState {
+  mobileOpen: boolean;
+}
+
+class App extends React.Component<Props, AppState> {
+
+  constructor(props: Props) {
+    super(props);
+    this.state = { mobileOpen: false };
+  }
+
+  handleDrawerClose = () => {
+    this.setState({
+      mobileOpen: false,
+    });
+  };
+
+  handleDrawerToggle = () => {
+    this.setState({
+      mobileOpen: !this.state.mobileOpen,
+    });
+  };
 
   render() {
     const { classes } = this.props;
@@ -39,8 +60,12 @@ class App extends React.Component<Props, {}> {
       <div>
         <CssBaseline />
         <div className={classes.root}>
-          <AppShellBar />
-          <AppDrawer />
+          <AppShellBar handleDrawerToggle={this.handleDrawerToggle} />
+          <AppDrawer
+            onToggle={this.handleDrawerToggle}
+            mobileOpen={this.state.mobileOpen}
+            onClose={this.handleDrawerClose}
+          />
           <main className={classes.content}>
             <div className={classes.toolbar} />
             <Route exact path="/" component={withTracker(Home, {})} />
