@@ -20,7 +20,7 @@ const styles: StyleRulesCallback<Classes> = theme => ({
 
 enum Branche {
     develop = 'develop',
-    ghPages = 'gh-pages',
+    master = 'master',
 }
 
 type MotivationalCardState = {
@@ -57,7 +57,7 @@ class MotivationalCard extends React.Component<WithStyles<Classes>, Motivational
 
     componentDidMount() {
         this.updateCommitDate(Branche.develop);
-        this.updateCommitDate(Branche.ghPages);
+        this.updateCommitDate(Branche.master);
     }
 
     render() {
@@ -72,10 +72,10 @@ class MotivationalCard extends React.Component<WithStyles<Classes>, Motivational
                         <Typography variant="body2">
                             {(() => {
                                 switch (branche) {
-                                    case Branche.ghPages:
+                                    case Branche.master:
                                         return 'These version has been published';
                                     case Branche.develop:
-                                        return 'Last commit on the "develop" branch was';
+                                        return 'Last "in progress" development was committed (and pushed to Github)';
                                     default:
                                         return '';
                                 }
@@ -104,7 +104,7 @@ class MotivationalCard extends React.Component<WithStyles<Classes>, Motivational
                     <SimpleTimer initialDate={moment({ year: 2018, month: 1, day: 26 })} />
                 </CardContent>
                 {commitDateCard(Branche.develop)}
-                {commitDateCard(Branche.ghPages)}
+                {commitDateCard(Branche.master)}
             </Card>
         );
     }
