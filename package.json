@@ -7,7 +7,7 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "github-api": "^3.0.0",
-    "material-ui": "~1.0.0-beta.34",
+    "material-ui": "^1.0.0-beta.34",
     "material-ui-icons": "^1.0.0-beta.35",
     "moment": "^2.21.0",
     "react": "^16.2.0",
@@ -16,12 +16,12 @@
     "react-redux": "^5.0.7",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts-ts": "^2.13.0",
-    "redux": "^4.0.0-beta.2",
-    "typesafe-actions": "^1.1.2",
-    "utility-types": "^1.1.0"
+    "redux": "^4.0.0-beta.2"
   },
   "devDependencies": {
+    "react-scripts-ts": "^2.13.0",
+    "typesafe-actions": "^1.1.2",
+    "utility-types": "^1.1.0",
     "@types/classnames": "^2.2.3",
     "@types/enzyme": "^3.1.9",
     "@types/enzyme-adapter-react-16": "^1.0.2",
@@ -37,7 +37,6 @@
     "better-npm-run": "^0.1.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "gh-pages": "^1.1.0",
     "mockdate": "^2.0.2",
     "react-test-renderer": "^16.2.0",
     "typescript": "^2.7.2"
