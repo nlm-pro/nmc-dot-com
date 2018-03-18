@@ -4,7 +4,8 @@ import Timer from 'material-ui-icons/Timer';
 import SimpleTimer from './SimpleTimer';
 import * as moment from 'moment';
 import withStyles from 'material-ui/styles/withStyles';
-import { default as Github } from 'github-api';
+import { Branche, fetchCommitDate, getCommit } from '../redux/git';
+import store from '../store';
 
 type Classes = 'card' | 'header';
 
@@ -17,11 +18,6 @@ const styles: StyleRulesCallback<Classes> = theme => ({
         marginBottom: theme.spacing.unit * 2
     }
 });
-
-enum Branche {
-    develop = 'develop',
-    master = 'master',
-}
 
 type MotivationalCardState = {
     [key in Branche]?: moment.Moment;
@@ -39,9 +35,9 @@ class MotivationalCard extends React.Component<WithStyles<Classes>, Motivational
     }
 
     updateCommitDate(branch: Branche) {
-        this.repo.getBranch(branch).then((res: any) => {
+        store.dispatch(fetchCommitDate(branch)).then(() => {
             this.setState({
-                [branch]: moment(res.data.commit.commit.committer.date.slice(0, -1)).add(1, 'h')
+                [branch]: getCommit(store.getState(), branch).data,
             });
         });
     }
@@ -49,10 +45,6 @@ class MotivationalCard extends React.Component<WithStyles<Classes>, Motivational
     getCommitDate(branch: Branche) {
         const commit = this.state && this.state[branch];
         return commit && commit.isValid() && commit;
-    }
-
-    componentWillMount() {
-        this.repo = (new Github()).getRepo('noelmace', 'nmc-dot-com');
     }
 
     componentDidMount() {
