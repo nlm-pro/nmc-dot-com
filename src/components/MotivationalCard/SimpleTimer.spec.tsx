@@ -10,14 +10,11 @@ let simpleTimer: SimpleTimerClass;
 const currentDate = '2000-12-31T23:59';
 
 beforeEach(() => {
-    // const div = document.createElement('div');
-    // ReactDOM.render(<SimpleTimer initialDate={moment()} />, div);
     const shallow = createShallow({ dive: true });
     wrapper = shallow(
         <SimpleTimer initialDate={moment(currentDate)} />,
     );
     simpleTimer = wrapper.instance() as SimpleTimerClass;
-
 });
 
 describe('getDelai', () => {

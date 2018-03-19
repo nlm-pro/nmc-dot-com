@@ -28,7 +28,7 @@ export class SimpleTimer extends React.Component<Props, SimpleTimerState> {
     constructor(props: Props) {
         super(props);
         this.state = {
-            time: this.props.initialDate.fromNow(),
+            time: this.props.initialDate ? this.props.initialDate.fromNow() : '',
         };
     }
 
@@ -41,9 +41,9 @@ export class SimpleTimer extends React.Component<Props, SimpleTimerState> {
         ) + 500;
     }
 
-    delaiUpdate() {
+    delaiUpdate(force: boolean = false) {
         clearInterval(this.timer);
-        this.timer = setTimeout(this.updateTime, this.getDelai());
+        this.timer = setTimeout(this.updateTime, force ? 100 : this.getDelai());
     }
 
     updateTime = () => {
@@ -57,8 +57,8 @@ export class SimpleTimer extends React.Component<Props, SimpleTimerState> {
         clearInterval(this.timer);
     }
 
-    componentDidMount() {
-        this.delaiUpdate();
+    componentWillReceiveProps() {
+        this.delaiUpdate(true);
     }
 
     render() {

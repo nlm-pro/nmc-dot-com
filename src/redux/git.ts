@@ -13,16 +13,18 @@ import { createAction, getType } from 'typesafe-actions';
 import { default as Github } from 'github-api';
 import * as moment from 'moment';
 
+export type AsyncCommitDates = {[key in Branche]: AsyncState<Moment>};
+
 export type GitState = Readonly<{
-    commitDates: {[key in Branche]: AsyncState<Moment>};
+    commitDates: AsyncCommitDates;
 }>;
 
 export const gitActions = {
-    requestCommitDate: createAction('[Git - commit date] request', (branche: string) => ({
+    requestCommitDate: createAction('[Git - commit date] request', (branche: Branche) => ({
         type: '[Git - commit date] request',
         branche,
     })),
-    receiveCommitDate: createAction('[Git - commit date] receive', (branche: string, commitDate: Moment) => ({
+    receiveCommitDate: createAction('[Git - commit date] receive', (branche: Branche, commitDate: Moment) => ({
         type: '[Git - commit date] receive',
         commitDate,
         branche,
@@ -30,18 +32,25 @@ export const gitActions = {
     })),
 };
 
-export function fetchCommitDate(branch: string) {
+export function fetchCommitDates() {
     const action: any = async (dispatch: any) => {
-        dispatch(gitActions.requestCommitDate(branch));
         const repo = (new Github()).getRepo('noelmace', 'nmc-dot-com');
-        try {
-            const res = await repo.getBranch(branch);
+
+        const getOne = async (branche: Branche) => {
+            dispatch(gitActions.requestCommitDate(branche));
+            const res = await repo.getBranch(branche);
             const date = moment(res.data.commit.commit.committer.date.slice(0, -1)).add(1, 'h');
-            return dispatch(gitActions.receiveCommitDate(branch, date));
+            return dispatch(gitActions.receiveCommitDate(branche, date));
+        };
+        
+        let rslt = null;
+        try {
+            rslt = await Promise.all([getOne(Branche.develop), getOne(Branche.master)]);
         } catch (error) {
             // tslint:disable-next-line:no-console
             console.log('An error occurred.', error);
         }
+        return rslt;
     };
     // FIXME : this is just a temporary workaround with redux-thunk TS typing
     // see https://github.com/gaearon/redux-thunk/pull/180
@@ -61,7 +70,7 @@ const defaultState: GitState = {
     }
 };
 
-export const getCommit = (state: RootState, branche: Branche) => state.git.commitDates[branche];
+export const getCommitDates = (state: RootState) => state.git.commitDates;
 
 export const gitReducer = combineReducers<GitState, RootAction>({
     commitDates: (state = defaultState.commitDates, action) => {
