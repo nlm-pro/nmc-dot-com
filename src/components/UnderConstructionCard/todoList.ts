@@ -20,10 +20,6 @@ export default [
         title: 'A good manifest, with splash screen and logos'
     },
     {
-        title: 'Quickly build a simple web app',
-        text: `With just the key features and a basic UI thanks to material-ui-next.`
-    },
-    {
         title: 'Network optimisation with a Service Worker',
     },
     {
@@ -38,6 +34,5 @@ export default [
     },
     {
         title: 'cohabitaton with React Native',
-        text: 'because I\'m gonna'
     }
 ] as ChecklistItem[];

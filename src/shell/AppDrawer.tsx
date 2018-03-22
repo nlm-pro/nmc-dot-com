@@ -109,7 +109,7 @@ class AppDrawer extends React.Component<Props, AppDrawerState> {
                     >
                         <div className={classes.toolbar} >
                             <Typography variant="title">No&euml;l Mac&eacute;</Typography>
-                            <Typography variant="subheading">Personal Web App</Typography>
+                            <Typography variant="subheading">(dot com)</Typography>
                         </div>
                         <Divider />
                         {menu}

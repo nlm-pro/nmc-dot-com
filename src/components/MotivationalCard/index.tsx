@@ -48,11 +48,10 @@ class MotivationalCard extends React.Component<WithStyles<Classes>, Motivational
                     avatar={
                         <Timer />
                     }
-                    title="Motivational Timer"
                     className={classes.header}
                 />
                 <CommitDateCard
-                    message="I started this new side project"
+                    message="This React version was started"
                     initialDate={moment({ year: 2018, month: 1, day: 26 })}
                 />
                 <ConnectedCommitDateCard branche={Branche.develop} />

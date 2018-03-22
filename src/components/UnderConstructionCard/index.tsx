@@ -11,12 +11,13 @@ import withStyles from 'material-ui/styles/withStyles';
 import FakeChecklist from '../FakeChecklist';
 import todoList from './todoList';
 
-type Classes = 'card' | 'actions' | 'expand' | 'expandOpen' | 'details' | 'media' | 'gif';
+type Classes = 'card' | 'actions' | 'expand' | 'expandOpen' | 'details' | 'media' | 'gif' | 'ghRibbon';
 type UnderConstructionCardState = { expanded: boolean };
 
 const styles: StyleRulesCallback<Classes> = theme => ({
     card: {
         textAlign: 'center',
+        position: 'relative',
     },
     actions: {
         display: 'flex',
@@ -41,6 +42,12 @@ const styles: StyleRulesCallback<Classes> = theme => ({
     },
     gif: {
         maxWidth: '100%',
+    },
+    ghRibbon: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        border: 0,
     }
 });
 
@@ -56,12 +63,19 @@ class UnderConstructionCard extends React.Component<WithStyles<Classes>, UnderCo
         const classes = this.props.classes;
         return (
             <Card className={classes.card}>
+                <a href="https://github.com/noelmace/nmc-dot-com">
+                    <img
+                        className={classes.ghRibbon}
+                        src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"
+                        alt="Fork me on GitHub"
+                    />
+                </a>
                 <CardHeader
                     avatar={
                         <Timelapse />
                     }
-                    title="Website under active development."
-                    subheader="With big chunks of React inside !"
+                    title="Don't expect a complete website."
+                    subheader="This is just one of my toys I (sometime) play with."
                 />
                 <CardContent className={classes.media}>
                     <video
@@ -82,15 +96,15 @@ class UnderConstructionCard extends React.Component<WithStyles<Classes>, UnderCo
                 </CardContent>
                 <CardContent>
                     <Typography variant="body2">
-                        Features will arrive piece by piece.
+                        This version was created to test some React features.
                     </Typography>
                     <Typography>
-                        So, take a drink, relax, and be patient. And above all, come back as often as possible !
+                        That being said, you should still find the informations you were looking for.
                     </Typography>
                 </CardContent>
                 <CardActions className={classes.actions} disableActionSpacing>
                     <Typography variant="caption">
-                        More info on current and futur developments
+                        More info about this project
                     </Typography>
                     <IconButton
                         className={classnames(classes.expand, {
@@ -106,7 +120,7 @@ class UnderConstructionCard extends React.Component<WithStyles<Classes>, UnderCo
                 <Collapse in={this.state.expanded} timeout="auto" unmountOnExit className={classes.details}>
                     <CardContent>
                         <Typography paragraph variant="body2">
-                            My "TO (Mebbe) DO" list
+                            Some things I could (mebbe) add someday
                         </Typography>
                         <FakeChecklist items={todoList} />
                     </CardContent>
