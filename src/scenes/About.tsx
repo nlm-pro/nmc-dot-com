@@ -1,8 +1,8 @@
 import * as React from 'react';
 import withStyles, { StyleRulesCallback, WithStyles } from 'material-ui/styles/withStyles';
-import Typography from 'material-ui/Typography';
 import store from '../store';
 import { shellActions } from '../redux/shell';
+import Giphy from '../components/Giphy';
 
 type Classes = 'about';
 
@@ -24,9 +24,11 @@ class About extends React.Component<WithStyles<Classes>, AboutState> {
         const { classes } = this.props;
         return (
             <div className={classes.about}>
-                <Typography variant="title">
-                    Writting in progress ...
-                </Typography>
+                <Giphy
+                    video="https://media.giphy.com/media/Yl5aO3gdVfsQ0/giphy.mp4"
+                    altHref="http://gph.is/1OLGL5d"
+                    poster="https://media.giphy.com/media/Yl5aO3gdVfsQ0/giphy_s.gif"
+                />
             </div>
         );
     }

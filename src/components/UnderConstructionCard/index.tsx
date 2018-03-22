@@ -5,11 +5,12 @@ import { CardActions, IconButton, Collapse } from 'material-ui';
 import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
 import Timelapse from 'material-ui-icons/Timelapse';
 import * as classnames from 'classnames';
-import poster from './giphy.gif';
-import video from './giphy.mp4';
+import poster from './its-alive.gif';
+import video from './its-alive.mp4';
 import withStyles from 'material-ui/styles/withStyles';
 import FakeChecklist from '../FakeChecklist';
 import todoList from './todoList';
+import Giphy from '../Giphy';
 
 type Classes = 'card' | 'actions' | 'expand' | 'expandOpen' | 'details' | 'media' | 'gif' | 'ghRibbon';
 type UnderConstructionCardState = { expanded: boolean };
@@ -78,21 +79,12 @@ class UnderConstructionCard extends React.Component<WithStyles<Classes>, UnderCo
                     subheader="This is just one of my toys I (sometime) play with."
                 />
                 <CardContent className={classes.media}>
-                    <video
-                        width="320"
-                        height="320"
-                        autoPlay
-                        loop
-                        muted
+                    <Giphy
+                        video={video}
                         poster={poster}
-                        className={classes.gif}
-                    >
-                        <source type="video/mp4" src={video} />
-                        Your browser does not support HTML5 video tag.
-                        <a href="https://gph.is/1ZidoAN">
-                            Click here to view original GIF
-                        </a>
-                    </video>
+                        videoClass={classes.gif}
+                        altHref="https://gph.is/1ZidoAN"
+                    />
                 </CardContent>
                 <CardContent>
                     <Typography variant="body2">
