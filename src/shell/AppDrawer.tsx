@@ -5,6 +5,7 @@ import {
 } from 'material-ui';
 import HomeIcon from 'material-ui-icons/Home';
 import PersonIcon from 'material-ui-icons/Person';
+import PublicIcon from 'material-ui-icons/Public';
 import Typography from 'material-ui/Typography';
 import { Link } from 'react-router-dom';
 import ChevronLeftIcon from 'material-ui-icons/ChevronLeft';
@@ -69,6 +70,14 @@ class AppDrawer extends React.Component<Props, AppDrawerState> {
                             <PersonIcon />
                         </ListItemIcon>
                         <ListItemText primary="About me" />
+                    </ListItem>
+                </Link>
+                <Link to="/networks" className={classes.link} onClick={onToggle}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <PublicIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Networks" />
                     </ListItem>
                 </Link>
             </List>

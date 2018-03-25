@@ -8,6 +8,7 @@
     "classnames": "^2.2.5",
     "github-api": "^3.0.0",
     "immutability-helper": "^2.6.6",
+    "jss-expand": "^5.1.0",
     "material-ui": "^1.0.0-beta.34",
     "material-ui-icons": "^1.0.0-beta.35",
     "moment": "^2.21.0",

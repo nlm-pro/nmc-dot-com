@@ -9,6 +9,7 @@ import AppDrawer, { drawerWidth } from './shell/AppDrawer';
 import AppShellBar from './shell/AppShellBar';
 import About from './scenes/About';
 import CssBaseline from 'material-ui/CssBaseline';
+import Networks from './scenes/Networks';
 
 type Classes = 'root' | 'appBar' | 'content' | 'toolbar';
 
@@ -70,6 +71,7 @@ class App extends React.Component<Props, AppState> {
             <div className={classes.toolbar} />
             <Route exact path="/" component={withTracker(Home, {})} />
             <Route path="/about" component={withTracker(About, {})} />
+            <Route path="/networks" component={withTracker(Networks, {})} />
           </main>
         </div>
       </div>
