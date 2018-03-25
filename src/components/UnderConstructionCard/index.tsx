@@ -64,19 +64,12 @@ class UnderConstructionCard extends React.Component<WithStyles<Classes>, UnderCo
         const classes = this.props.classes;
         return (
             <Card className={classes.card}>
-                <a href="https://github.com/noelmace/nmc-dot-com">
-                    <img
-                        className={classes.ghRibbon}
-                        src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"
-                        alt="Fork me on GitHub"
-                    />
-                </a>
                 <CardHeader
                     avatar={
                         <Timelapse />
                     }
                     title="Don't expect a complete website."
-                    subheader="This is just one of my toys I (sometime) play with."
+                    subheader="This is just one of my toys I (sometimes) play with."
                 />
                 <CardContent className={classes.media}>
                     <Giphy

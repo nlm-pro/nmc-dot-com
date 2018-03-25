@@ -47,15 +47,15 @@ class About extends React.Component<WithStyles<Classes>, AboutState> {
                 logo: twitterLogo,
                 href: 'https://twitter.com/noel_mace',
                 content: (
-                    <Typography variant="body1" align="justify">
-                        <p>
+                    <div>
+                        <Typography variant="body1" align="justify">
                             At the end of 2017, I decided to return to Twitter,
                             almost exclusively for development-related discussions.
-                        </p>
-                        <p>
+                        </Typography>
+                        <Typography variant="body1" align="justify">
                             Most of my posts are now in English.
-                        </p>
-                    </Typography>
+                        </Typography>
+                    </div>
                 ),
                 actions: (
                     <div>
@@ -84,20 +84,20 @@ class About extends React.Component<WithStyles<Classes>, AboutState> {
                 logo: ghMark,
                 href: 'https://github.com/noelmace',
                 content: (
-                    <Typography variant="body1" align="justify">
-                        <p>
+                    <div>
+                        <Typography variant="body1" align="justify">
                             Like any of you, I love Github !
-                        </p>
-                        <p>
+                            </Typography>
+                        <Typography variant="body1" align="justify">
                             This is for me the best place where to make technological watch,
                             to find great projects to use (or, even better, to contribute to).
-                        </p>
-                        <p>
+                            </Typography>
+                        <Typography variant="body1" align="justify">
                             It's even, from my perspective, one of the best places where to find
                             technical issues solutions ! Yes, even better than StackOverflow,
                             given that I only use open source libraries, and as much FOSS sofwares as possible).
-                        </p>
-                    </Typography>
+                        </Typography>
+                    </div>
                 ),
             },
             {
@@ -110,18 +110,17 @@ class About extends React.Component<WithStyles<Classes>, AboutState> {
                 content: (
                     <div>
                         <Typography variant="body1" align="justify">
-                            <p>
-                                Ok, LinkedIn is far from being my favorite networking place. I go there very little,
-                                and I write hardly a post per year.
-                            </p>
-                            <p>
-                                But it is a good solution to keep in touch with professional contacts,
-                                or to make from time to time (recruiters excluded) new contacts.
-                            </p>
-                            <p>
-                                So, if you think we have worked (or could work) together someday, do not hesitate to
-                                send a request.
-                            </p>
+                            Ok, LinkedIn is far from being my favorite networking place. I go there very little,
+                            and I write hardly a post per year.
+                                </Typography>
+
+                        <Typography variant="body1" align="justify">
+                            But it is a good solution to keep in touch with professional contacts,
+                            or to make from time to time (recruiters excluded) new contacts.
+                                </Typography>
+                        <Typography variant="body1" align="justify">
+                            So, if you think we have worked (or could work) together someday, do not hesitate to
+                            send a request.
                         </Typography>
                     </div>
                 ),

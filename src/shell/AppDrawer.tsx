@@ -16,6 +16,7 @@ export const drawerWidth = 240;
 
 const styles: StyleRulesCallback<Classes> = theme => ({
     drawerPaper: {
+        position: 'relative',
         width: drawerWidth,
         [theme.breakpoints.up('md')]: {
             position: 'relative',
