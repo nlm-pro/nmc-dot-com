@@ -58,22 +58,20 @@ class App extends React.Component<Props, AppState> {
   render() {
     const { classes } = this.props;
     return (
-      <div>
+      <div className={classes.root}>
         <CssBaseline />
-        <div className={classes.root}>
-          <AppShellBar handleDrawerToggle={this.handleDrawerToggle} />
-          <AppDrawer
-            onToggle={this.handleDrawerToggle}
-            mobileOpen={this.state.mobileOpen}
-            onClose={this.handleDrawerClose}
-          />
-          <main className={classes.content}>
-            <div className={classes.toolbar} />
-            <Route exact path="/" component={withTracker(Home, {})} />
-            <Route path="/about" component={withTracker(About, {})} />
-            <Route path="/networks" component={withTracker(Networks, {})} />
-          </main>
-        </div>
+        <AppShellBar handleDrawerToggle={this.handleDrawerToggle} />
+        <AppDrawer
+          onToggle={this.handleDrawerToggle}
+          mobileOpen={this.state.mobileOpen}
+          onClose={this.handleDrawerClose}
+        />
+        <main className={classes.content}>
+          <div className={classes.toolbar} />
+          <Route exact path="/" component={withTracker(Home, {})} />
+          <Route path="/about" component={withTracker(About, {})} />
+          <Route path="/networks" component={withTracker(Networks, {})} />
+        </main>
       </div>
     );
   }

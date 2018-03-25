@@ -10,7 +10,7 @@ import Typography from 'material-ui/Typography';
 import { Link } from 'react-router-dom';
 import ChevronLeftIcon from 'material-ui-icons/ChevronLeft';
 
-type Classes = 'drawerPaper' | 'toolbar' | 'link' | 'mobileDrawerHeader';
+type Classes = 'drawerPaper' | 'toolbar' | 'link' | 'mobileDrawerHeader' | 'desktopDrawerContainer';
 
 export const drawerWidth = 240;
 
@@ -18,9 +18,16 @@ const styles: StyleRulesCallback<Classes> = theme => ({
     drawerPaper: {
         position: 'relative',
         width: drawerWidth,
+        height: 'inherit',
+        minHeight: '100vh',
         [theme.breakpoints.up('md')]: {
             position: 'relative',
         },
+    },
+    desktopDrawerContainer: {
+        [theme.breakpoints.up('md')]: {
+            display: 'flex',
+        }
     },
     link: {
         textDecoration: 'none',
@@ -86,7 +93,7 @@ class AppDrawer extends React.Component<Props, AppDrawerState> {
 
         // TODO: active Link
         return (
-            <div>
+            <div className={classes.desktopDrawerContainer}>
                 <Hidden mdUp>
                     <Drawer
                         variant="temporary"
@@ -109,11 +116,12 @@ class AppDrawer extends React.Component<Props, AppDrawerState> {
                         {menu}
                     </Drawer>
                 </Hidden>
-                <Hidden smDown implementation="css">
+                <Hidden smDown implementation="css" className={classes.desktopDrawerContainer}>
                     <Drawer
                         variant="permanent"
                         classes={{
                             paper: classes.drawerPaper,
+                            docked: classes.desktopDrawerContainer,
                         }}
                         anchor="left"
                     >
